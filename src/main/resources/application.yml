@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: apireme
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: com.br.gov.ms.campogrande.apireme.config.LegacyPostgreSQLDialect
+
+  profiles:
+    active: ${spring.profiles.active}
+
+server:
+  port: 8081
+  max-http-request-header-size: 32KB
