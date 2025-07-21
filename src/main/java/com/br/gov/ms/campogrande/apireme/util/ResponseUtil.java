@@ -15,7 +15,9 @@ public class ResponseUtil {
 
         body.put("data", data);
         body.put("status", status.value());
-        body.put("msg", (message != null && message.length > 0) ? message[0] : null);
+        if (message != null) {
+            body.put("msg", message.length > 0 ? message[0] : null);
+        }
 
         return new ResponseEntity<>(body, status);
     }

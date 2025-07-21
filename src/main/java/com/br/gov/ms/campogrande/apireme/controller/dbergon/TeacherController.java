@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/teachers")
+@RequestMapping("/teacher")
 @RequiredArgsConstructor
 public class TeacherController {
 
@@ -19,7 +19,7 @@ public class TeacherController {
 
     @GetMapping
     public ResponseEntity<Object> getAllTeachers() {
-        return ResponseUtil.generateResponse(teacherService.findAll(), HttpStatus.OK, "Lista de professores encontrada.");
+        return ResponseUtil.generateResponse(teacherService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{cpf}")

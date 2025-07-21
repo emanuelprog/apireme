@@ -38,3 +38,7 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: https://autenticacao-h.campogrande.ms.gov.br/auth/realms/campograndems/protocol/openid-connect/certs
+
+keycloak:
+  token-uri: https://autenticacao-h.campogrande.ms.gov.br/auth/realms/campograndems/protocol/openid-connect/token
+  client-id: web_app
