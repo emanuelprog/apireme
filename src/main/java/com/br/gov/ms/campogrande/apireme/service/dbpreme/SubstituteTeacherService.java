@@ -8,5 +8,5 @@ public interface SubstituteTeacherService {
 
     List<SubstituteTeacherDTO> findByHolderCPF(String cpf);
 
-    SubstituteTeacherDTO findBySubstituteCPF(String cpf);
+    List<SubstituteTeacherDTO> findBySubstituteCPF(String cpf);
 }

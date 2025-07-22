@@ -45,11 +45,13 @@ public interface SubstituteTeacherMapper {
     @Mapping(target = "leaveStatus", ignore = true)
     TeacherDTO toTeacherDTOFromHolder(SubstituteTeacherDTO dto);
 
+    @Mapping(target = "enrollment", expression = "java(parseLong(dto.getHolderEnrollment()))")
     @Mapping(source = "holderCPF", target = "holderCpf")
     @Mapping(source = "holderName", target = "holderName")
     @Mapping(source = "id", target = "substituteTeacherId")
     @Mapping(source = "substituteCPF", target = "cpf")
     @Mapping(source = "substituteName", target = "name")
+    @Mapping(target = "isCoordinator", constant = "false")
     TeacherDTO toTeacherDTOWithSubstitution(SubstituteTeacherDTO dto);
 
     default Long parseLong(String value) {

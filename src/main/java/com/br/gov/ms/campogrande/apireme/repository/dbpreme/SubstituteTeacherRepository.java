@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface SubstituteTeacherRepository extends JpaRepository<SubstituteTeacher, Long> {
     List<SubstituteTeacher> findAllByHolderCPF(String cpf);
 
-    SubstituteTeacher findBySubstituteCPF(String cpf);
+    List<SubstituteTeacher> findAllBySubstituteCPF(String cpf);
 }
