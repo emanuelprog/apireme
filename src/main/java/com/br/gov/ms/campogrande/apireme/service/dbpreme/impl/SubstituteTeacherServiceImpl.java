@@ -18,13 +18,6 @@ public class SubstituteTeacherServiceImpl implements SubstituteTeacherService {
     private final SubstituteTeacherMapper substituteTeacherMapper;
 
     @Override
-    public List<SubstituteTeacherDTO> findByHolderCPF(String cpf) {
-        return substituteTeacherRepository.findAllByHolderCPF(cpf).stream()
-                .map(substituteTeacherMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<SubstituteTeacherDTO> findBySubstituteCPF(String cpf) {
         return substituteTeacherRepository.findAllBySubstituteCPF(cpf).stream()
                 .map(substituteTeacherMapper::toDTO)

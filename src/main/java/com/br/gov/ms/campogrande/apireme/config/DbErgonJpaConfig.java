@@ -30,7 +30,7 @@ public class DbErgonJpaConfig {
         Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
         jpaProperties.put("hibernate.hbm2ddl.auto", "none");
-        jpaProperties.put("hibernate.show_sql", false);
+        jpaProperties.put("hibernate.show_sql", true);
 
         return builder
                 .dataSource(dataSource)

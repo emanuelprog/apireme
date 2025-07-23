@@ -6,7 +6,5 @@ import java.util.List;
 
 public interface SubstituteTeacherService {
 
-    List<SubstituteTeacherDTO> findByHolderCPF(String cpf);
-
     List<SubstituteTeacherDTO> findBySubstituteCPF(String cpf);
 }

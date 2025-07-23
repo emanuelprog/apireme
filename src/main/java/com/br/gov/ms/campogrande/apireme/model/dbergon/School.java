@@ -1,9 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.model.dbergon;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -18,6 +15,10 @@ public class School {
     @Column(name = "NOME_SETOR")
     private String sectorName;
 
-    @Column(name = "matricula")
+    @Column(name = "MATRICULA")
     private String enrollment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SETOR", referencedColumnName = "SETOR", insertable = false, updatable = false)
+    private SchoolSector schoolSector;
 }
