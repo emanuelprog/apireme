@@ -22,16 +22,16 @@ public class DiaryGradeController {
 
     @GetMapping
     @Operation(summary = "Diário de Classe", description = "Retorna todas os diários de classe disponíveis para um professor")
-    public ResponseEntity<Object> getAllGrades(
-            @RequestParam String enrollment,
-            @RequestParam Long teachingTypeId,
+    public ResponseEntity<Object> getAllDiary(
+            @RequestParam(required = false) String enrollment,
+            @RequestParam(required = false) Long teachingTypeId,
             @RequestParam String sector,
-            @RequestParam Long year,
-            @RequestParam Long shiftId,
-            @RequestParam Long groupId,
-            @RequestParam Long disciplineId,
-            @RequestParam Long gradeId,
-            @RequestParam Long bimester
+            @RequestParam(required = false) Long year,
+            @RequestParam(required = false) Long shiftId,
+            @RequestParam(required = false) Long groupId,
+            @RequestParam(required = false) Long disciplineId,
+            @RequestParam(required = false) Long gradeId,
+            @RequestParam(required = false) Long bimester
     ) {
         return ResponseUtil.generateResponse(diaryGradeService.findByFilter(enrollment, teachingTypeId, sector, year, shiftId, groupId, disciplineId, gradeId, bimester), HttpStatus.OK);
     }
