@@ -1,8 +1,10 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.BimesterPeriodDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryCreationInfoDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryGradeDTO;
 import com.br.gov.ms.campogrande.apireme.exception.NotFoundException;
+import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.BimesterPeriodMapper;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.DiaryGradeMapper;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.BimesterPeriodRepository;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.DiaryGradeRepository;
@@ -22,6 +24,7 @@ public class DiaryGradeServiceImpl implements DiaryGradeService {
 
     private final TeacherScheduleRepository teacherScheduleRepository;
     private final BimesterPeriodRepository bimesterPeriodRepository;
+    private final BimesterPeriodMapper bimesterPeriodMapper;
 
     @Override
     public List<DiaryGradeDTO> findByFilter(String enrollment, Long teachingTypeId, String sector, Long year, Long shiftId, Long groupId, Long disciplineId, Long gradeId, Long bimester) {
@@ -34,9 +37,9 @@ public class DiaryGradeServiceImpl implements DiaryGradeService {
         Long teacherScheduleId = teacherScheduleRepository.findIdByParams(teachingTypeId, schoolNumber, enrollment, year, shiftId)
                 .orElseThrow(() -> new NotFoundException("Horario do Professor não encontrado com os dados informados"));
 
-        Long bimesterPeriodId = bimesterPeriodRepository.findBimesterPeriodId(bimester, year)
+        BimesterPeriodDTO bimesterPeriodDTO = bimesterPeriodRepository.findBimesterPeriodId(bimester, year).map(bimesterPeriodMapper::toDTO)
                 .orElseThrow(() -> new NotFoundException("Período do bimestre não encontrado para o ano informado"));
 
-        return new DiaryCreationInfoDTO(teacherScheduleId, bimesterPeriodId);
+        return new DiaryCreationInfoDTO(teacherScheduleId, bimesterPeriodDTO);
     }
 }

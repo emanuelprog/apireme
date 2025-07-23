@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface BimesterPeriodRepository extends JpaRepository<BimesterPeriod, Long> {
 
     @Query("""
-    SELECT p.id
+    SELECT p
     FROM BimesterPeriod p
     WHERE p.bimester = :bimester
     AND EXTRACT(YEAR FROM p.startDate) = :year
     """)
-    Optional<Long> findBimesterPeriodId(@Param("bimester") Long bimester, @Param("year") Long year);
+    Optional<BimesterPeriod> findBimesterPeriodId(@Param("bimester") Long bimester, @Param("year") Long year);
 
 }

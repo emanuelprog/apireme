@@ -1,5 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.dto.dbpreme;
 
+import com.br.gov.ms.campogrande.apireme.model.dbpreme.BimesterPeriod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,5 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class DiaryCreationInfoDTO {
     private Long teacherScheduleId;
-    private Long bimesterPeriodId;
+    private BimesterPeriodDTO bimesterPeriod;
 }
