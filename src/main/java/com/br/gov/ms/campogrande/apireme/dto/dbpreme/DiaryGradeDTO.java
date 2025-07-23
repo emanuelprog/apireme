@@ -17,6 +17,7 @@ public class DiaryGradeDTO {
     private Long employmentLink;
     private BimesterPeriodDTO bimesterPeriod;
     private DisciplineDTO discipline;
+    private Long diaryStatusId;
     private Long teacherScheduleId;
     private String diaryType;
     private Long assessmentTypeId;

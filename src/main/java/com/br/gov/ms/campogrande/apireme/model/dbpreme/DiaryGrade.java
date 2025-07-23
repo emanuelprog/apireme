@@ -51,6 +51,9 @@ public class DiaryGrade {
     @JoinColumn(name = "disciplinaid")
     private Discipline discipline;
 
+    @Column(name = "statusdiarioid")
+    private Long diaryStatusId;
+
     @Column(name = "horarioprofessorid")
     private Long teacherScheduleId;
 

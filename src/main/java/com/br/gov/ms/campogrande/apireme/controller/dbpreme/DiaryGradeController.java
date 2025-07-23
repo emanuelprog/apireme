@@ -35,4 +35,17 @@ public class DiaryGradeController {
     ) {
         return ResponseUtil.generateResponse(diaryGradeService.findByFilter(enrollment, teachingTypeId, sector, year, shiftId, groupId, disciplineId, gradeId, bimester), HttpStatus.OK);
     }
+
+    @GetMapping("/info")
+    @Operation(summary = "Dados auxiliares para criação de diário", description = "Retorna informações derivadas dos filtros preenchidos")
+    public ResponseEntity<Object> getDiaryCreationInfo(
+            @RequestParam String enrollment,
+            @RequestParam Long teachingTypeId,
+            @RequestParam Long schoolNumber,
+            @RequestParam Long year,
+            @RequestParam Long shiftId,
+            @RequestParam Long bimester
+    ) {
+        return ResponseUtil.generateResponse(diaryGradeService.findInfoForCreation(enrollment, teachingTypeId, schoolNumber, year, shiftId, bimester), HttpStatus.OK);
+    }
 }
