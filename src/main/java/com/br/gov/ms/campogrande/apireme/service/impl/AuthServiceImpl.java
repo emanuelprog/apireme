@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +55,11 @@ public class AuthServiceImpl implements AuthService {
 
     private boolean tryAddSubstitute(String cpf, List<TeacherDTO> teachers) {
         List<SubstituteTeacherDTO> substituted = substituteTeacherService.findBySubstituteCPF(cpf);
+
+        substituted.forEach(sub ->
+                teacherService.findByCPF(sub.getHolderCPF())
+                        .ifPresent(teacherDTO -> sub.setHolderEmploymentLink(teacherDTO.getEmploymentLink()))
+        );
 
         if (substituted.isEmpty()) return false;
 

@@ -32,19 +32,19 @@ public class DataSourceConfig {
         return JdbcClient.create(dataSource);
     }
 
-    @Bean(name = "dbacessosDataSourceProperties")
-    @ConfigurationProperties(prefix = "app.datasource.dbacessos")
-    public DataSourceProperties dbAcessosDsProps() {
+    @Bean(name = "dbeduDataSourceProperties")
+    @ConfigurationProperties(prefix = "app.datasource.dbedu")
+    public DataSourceProperties dbEduDsProps() {
         return new DataSourceProperties();
     }
 
-    @Bean(name = "dbacessosDataSource")
-    public DataSource dbAcessosDs(@Qualifier("dbacessosDataSourceProperties") DataSourceProperties properties) {
+    @Bean(name = "dbeduDataSource")
+    public DataSource dbEduDs(@Qualifier("dbeduDataSourceProperties") DataSourceProperties properties) {
         return properties.initializeDataSourceBuilder().build();
     }
 
-    @Bean(name = "dbacessosJdbcClient")
-    public JdbcClient dbAcessosJdbcClient(@Qualifier("dbacessosDataSource") DataSource dataSource) {
+    @Bean(name = "dbeduJdbcClient")
+    public JdbcClient dbEduJdbcClient(@Qualifier("dbeduDataSource") DataSource dataSource) {
         return JdbcClient.create(dataSource);
     }
 

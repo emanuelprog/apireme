@@ -7,7 +7,6 @@ import com.br.gov.ms.campogrande.apireme.service.dbergon.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,11 +15,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
-
-    @Override
-    public List<TeacherDTO> findAll() {
-        return teacherRepository.findAll().stream().map(teacherMapper::toDTO).toList();
-    }
 
     @Override
     public Optional<TeacherDTO> findByCPF(String cpf) {

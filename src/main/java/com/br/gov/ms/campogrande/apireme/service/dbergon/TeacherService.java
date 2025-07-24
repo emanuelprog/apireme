@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface TeacherService {
 
-    List<TeacherDTO> findAll();
-
     Optional<TeacherDTO> findByCPF(String cpf);
 }

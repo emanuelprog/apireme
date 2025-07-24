@@ -5,10 +5,10 @@ app:
       username: upremet
       password: upremet
 
-    dbacessos:
-      url: jdbc:postgresql://10.0.0.118:5432/DBACESSOST
-      username: postgres
-      password: postgres118
+    dbedu:
+      url: jdbc:postgresql://10.0.0.128:5432/DBEDUT
+      username: ueductst
+      password: ueductst
 
     dbergon:
       url: jdbc:oracle:thin:@10.0.0.208:1521:ERGONH

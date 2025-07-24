@@ -16,6 +16,7 @@ public interface SubstituteTeacherMapper {
     @Mapping(target = "enrollment", expression = "java(parseLong(dto.getHolderEnrollment()))")
     @Mapping(source = "holderCPF", target = "holderCpf")
     @Mapping(source = "holderName", target = "holderName")
+    @Mapping(source = "holderEmploymentLink", target = "employmentLink")
     @Mapping(source = "id", target = "substituteTeacherId")
     @Mapping(source = "substituteCPF", target = "cpf")
     @Mapping(source = "substituteName", target = "name")

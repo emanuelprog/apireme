@@ -14,26 +14,26 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.br.gov.ms.campogrande.apireme.repository.dbacessos",
-        entityManagerFactoryRef = "dbAcessosEntityManagerFactory",
-        transactionManagerRef = "dbAcessosTransactionManager"
+        basePackages = "com.br.gov.ms.campogrande.apireme.repository.dbedu",
+        entityManagerFactoryRef = "dbEduEntityManagerFactory",
+        transactionManagerRef = "dbEduTransactionManager"
 )
-public class DbAcessosJpaConfig {
+public class DbEduJpaConfig {
 
-    @Bean(name = "dbAcessosEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean dbAcessosEntityManagerFactory(
-            @Qualifier("dbacessosDataSource") DataSource dataSource,
+    @Bean(name = "dbEduEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean dbEduEntityManagerFactory(
+            @Qualifier("dbeduDataSource") DataSource dataSource,
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.br.gov.ms.campogrande.apireme.model.dbacessos")
-                .persistenceUnit("dbacessos")
+                .packages("com.br.gov.ms.campogrande.apireme.model.dbedu")
+                .persistenceUnit("dbedu")
                 .build();
     }
 
-    @Bean(name = "dbAcessosTransactionManager")
-    public PlatformTransactionManager dbAcessosTransactionManager(
-            @Qualifier("dbAcessosEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+    @Bean(name = "dbEduTransactionManager")
+    public PlatformTransactionManager dbEduTransactionManager(
+            @Qualifier("dbEduEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

@@ -19,5 +19,6 @@ public class TeacherDTO {
 
     private String holderCpf;
     private String holderName;
+    private Long holderEmploymentLink;
     private Long substituteTeacherId;
 }

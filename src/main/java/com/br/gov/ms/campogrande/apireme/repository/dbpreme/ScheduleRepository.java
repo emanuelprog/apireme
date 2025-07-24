@@ -52,4 +52,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 """)
     List<Grade> findDistinctGradesByTeacherSchedule(Long teacherScheduleId);
 
+    List<Schedule> findByTeacherScheduleId(Long teacherScheduleId);
 }

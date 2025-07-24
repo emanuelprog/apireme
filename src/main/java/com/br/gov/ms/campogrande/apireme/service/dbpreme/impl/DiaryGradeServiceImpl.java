@@ -6,6 +6,7 @@ import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryGradeDTO;
 import com.br.gov.ms.campogrande.apireme.exception.NotFoundException;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.BimesterPeriodMapper;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.DiaryGradeMapper;
+import com.br.gov.ms.campogrande.apireme.model.dbpreme.DiaryGrade;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.BimesterPeriodRepository;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.DiaryGradeRepository;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.TeacherScheduleRepository;
@@ -41,5 +42,10 @@ public class DiaryGradeServiceImpl implements DiaryGradeService {
                 .orElseThrow(() -> new NotFoundException("Período do bimestre não encontrado para o ano informado"));
 
         return new DiaryCreationInfoDTO(teacherScheduleId, bimesterPeriodDTO);
+    }
+
+    @Override
+    public DiaryGradeDTO save(DiaryGrade diaryGrade) {
+        return diaryGradeMapper.toDTO(diaryGradeRepository.save(diaryGrade));
     }
 }

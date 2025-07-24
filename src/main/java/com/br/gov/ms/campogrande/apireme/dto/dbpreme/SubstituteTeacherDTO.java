@@ -16,4 +16,5 @@ public class SubstituteTeacherDTO {
     private String holderCPF;
     private String holderName;
     private String holderEnrollment;
+    private Long holderEmploymentLink;
 }
