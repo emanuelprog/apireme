@@ -1,6 +1,6 @@
-package com.br.gov.ms.campogrande.apireme.dto.dbpreme;
+package com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary;
 
-import com.br.gov.ms.campogrande.apireme.model.dbpreme.BimesterPeriod;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.BimesterPeriodDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

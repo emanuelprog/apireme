@@ -9,7 +9,7 @@ import lombok.Data;
 public class FrequencyType {
 
     @Id
-    @Column(name = "tipo_frequencia")
+    @Column(name = "tipofrequenciaid")
     private Long id;
 
     @Column(name = "descricao")

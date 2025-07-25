@@ -1,11 +1,12 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryGradeDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.FrequencyResponseDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.StudentFrequencyDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary.DiaryGradeDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencyResponseDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencySaveDTO;
 import com.br.gov.ms.campogrande.apireme.model.dbedu.Student;
 import com.br.gov.ms.campogrande.apireme.model.dbpreme.StudentFrequency;
-import com.br.gov.ms.campogrande.apireme.payload.FrequencySavePayload;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencySaveDTO;
 import com.br.gov.ms.campogrande.apireme.service.dbdedu.StudentService;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.*;
 import lombok.RequiredArgsConstructor;
@@ -45,14 +46,15 @@ public class FrequencyServiceImpl implements FrequencyService {
     }
 
     @Override
-    public FrequencySavePayload saveFrequencies(FrequencySavePayload payload) {
+    public FrequencySaveDTO saveFrequencies(FrequencySaveDTO payload) {
         DiaryGradeDTO savedDiaryGrade = diaryGradeService.save(payload.getDiaryGrade());
 
-        studentFrequencyService.saveStudentFrequencies(
+        List<StudentFrequencySaveDTO> studentFrequencySaveDTOS = studentFrequencyService.saveStudentFrequencies(
                 payload.getFrequencies(), savedDiaryGrade.getId(), savedDiaryGrade.getChangeUser()
         );
 
         payload.getDiaryGrade().setId(savedDiaryGrade.getId());
+        payload.setFrequencies(studentFrequencySaveDTOS);
 
         return payload;
     }

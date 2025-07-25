@@ -1,8 +1,8 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.BimesterPeriodDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryCreationInfoDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryGradeDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary.DiaryCreationInfoDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary.DiaryGradeDTO;
 import com.br.gov.ms.campogrande.apireme.exception.NotFoundException;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.BimesterPeriodMapper;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.DiaryGradeMapper;

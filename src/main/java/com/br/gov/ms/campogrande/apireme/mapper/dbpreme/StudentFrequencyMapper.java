@@ -1,9 +1,9 @@
 package com.br.gov.ms.campogrande.apireme.mapper.dbpreme;
 
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.FrequencyEntryDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.StudentFrequencyDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencyEntryDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
 import com.br.gov.ms.campogrande.apireme.model.dbpreme.StudentFrequency;
-import com.br.gov.ms.campogrande.apireme.payload.StudentFrequencyPayload;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencySaveDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -21,7 +21,7 @@ public interface StudentFrequencyMapper {
     @Mapping(target = "classTimeId", expression = "java(parseClassTime(entry.getClassTime()))")
     @Mapping(target = "frequencyTypeId", expression = "java(parseFrequencyValue(entry.getValue()))")
     @Mapping(target = "changeUser", source = "changeUser")
-    StudentFrequency toModel(FrequencyEntryDTO entry, StudentFrequencyPayload student, Long diaryGradeId, String changeUser);
+    StudentFrequency toModel(FrequencyEntryDTO entry, StudentFrequencySaveDTO student, Long diaryGradeId, String changeUser);
 
     StudentFrequencyDTO toDTO(StudentFrequency model);
 

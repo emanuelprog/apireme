@@ -1,5 +1,6 @@
-package com.br.gov.ms.campogrande.apireme.dto.dbpreme;
+package com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary;
 
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.*;
 import lombok.Data;
 
 import java.util.Date;

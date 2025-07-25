@@ -1,6 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.mapper.dbpreme;
 
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.DiaryGradeDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary.DiaryGradeDTO;
 import com.br.gov.ms.campogrande.apireme.model.dbpreme.DiaryGrade;
 import org.mapstruct.Mapper;
 

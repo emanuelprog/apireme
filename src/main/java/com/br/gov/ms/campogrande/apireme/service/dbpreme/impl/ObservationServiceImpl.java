@@ -1,5 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
 import com.br.gov.ms.campogrande.apireme.model.dbpreme.HistoryFrequency;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.ObservationService;
 import com.br.gov.ms.campogrande.apireme.util.DateUtil;
@@ -16,9 +17,10 @@ import java.util.Map;
 public class ObservationServiceImpl implements ObservationService {
 
     @Override
-    public void applyObservationsFrequency(List<HistoryFrequency> histories, List<String> dateColumns,
-                                  Map<String, String> freqMap,
-                                  Map<String, Map<String, Boolean>> editableMap) {
+    public void applyObservationsFrequency(List<HistoryFrequency> histories,
+                                           List<String> dateColumns,
+                                           Map<String, StudentFrequencyDTO.FrequencyValueDTO> freqMap,
+                                           Map<String, Map<String, Boolean>> editableMap) {
         for (HistoryFrequency history : histories) {
             LocalDate start = DateUtil.convertToLocalDate(history.getStartDate());
             LocalDate end = DateUtil.convertToLocalDate(history.getEndDate());
@@ -29,7 +31,15 @@ public class ObservationServiceImpl implements ObservationService {
                 String formatted = date.format(DateTimeFormatter.ofPattern("dd/MM"));
                 for (String column : dateColumns) {
                     if (column.endsWith(formatted)) {
-                        freqMap.put(column, mark);
+                        if (freqMap.containsKey(column)) {
+                            freqMap.get(column).setValue(mark);
+                        } else {
+                            freqMap.put(column, StudentFrequencyDTO.FrequencyValueDTO.builder()
+                                    .id(null)
+                                    .value(mark)
+                                    .build());
+                        }
+
                         editableMap.put(column, FrequencyUtil.buildCellInfo(false, true));
                     }
                 }

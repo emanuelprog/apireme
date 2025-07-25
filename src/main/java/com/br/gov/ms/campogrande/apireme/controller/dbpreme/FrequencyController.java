@@ -1,6 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.controller.dbpreme;
 
-import com.br.gov.ms.campogrande.apireme.payload.FrequencySavePayload;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencySaveDTO;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.FrequencyService;
 import com.br.gov.ms.campogrande.apireme.util.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,7 +37,7 @@ public class FrequencyController {
 
     @PostMapping
     @Operation(summary = "Diário e Frequência", description = "Salva o diário de classe e as frequências dos alunos")
-    public ResponseEntity<Object> saveFrequencies(@RequestBody FrequencySavePayload payload) {
+    public ResponseEntity<Object> saveFrequencies(@RequestBody FrequencySaveDTO payload) {
         return ResponseUtil.generateResponse(frequencyService.saveFrequencies(payload), HttpStatus.CREATED, "Frequências salvas com sucesso.");
     }
 }

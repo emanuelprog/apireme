@@ -1,4 +1,4 @@
-package com.br.gov.ms.campogrande.apireme.dto.dbpreme;
+package com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
