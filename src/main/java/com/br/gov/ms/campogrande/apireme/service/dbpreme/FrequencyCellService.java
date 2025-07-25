@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface FrequencyCellService {
-    Map<String, StudentFrequencyDTO.FrequencyValueDTO> buildDefaultFrequencies(List<String> dateColumns, List<StudentFrequency> studentFrequencies);
-    Map<String, Map<String, Boolean>> buildDefaultEditableMap(List<String> dateColumns, boolean hasOccurrence);
-}
+    Map<String, StudentFrequencyDTO.FrequencyCellDTO> buildDefaultFrequencies(List<String> dateColumns, List<StudentFrequency> studentFrequencies);
+
+    Map<String, StudentFrequencyDTO.EditableFrequencyDTO> buildDefaultEditableMap(List<String> dateColumns, boolean hasOccurrence);}

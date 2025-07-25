@@ -20,7 +20,10 @@ public class FrequencyCellServiceImpl implements FrequencyCellService {
     private final FrequencyTypeService frequencyTypeService;
 
     @Override
-    public Map<String, StudentFrequencyDTO.FrequencyValueDTO> buildDefaultFrequencies(List<String> dateColumns, List<StudentFrequency> studentFrequencies) {
+    public Map<String, StudentFrequencyDTO.FrequencyCellDTO> buildDefaultFrequencies(
+            List<String> dateColumns,
+            List<StudentFrequency> studentFrequencies
+    ) {
         Map<String, StudentFrequency> frequencyByKey = studentFrequencies.stream()
                 .collect(Collectors.toMap(
                         f -> FrequencyUtil.formatDateKey(f.getClassTimeId(), f.getFrequencyDate()),
@@ -32,16 +35,25 @@ public class FrequencyCellServiceImpl implements FrequencyCellService {
                 .collect(Collectors.toMap(
                         d -> d,
                         d -> {
+                            String[] parts = d.split(" - ");
+                            String classTime = parts.length > 0 ? parts[0].trim() : "";
+                            String formattedDate = parts.length > 1 ? parts[1].trim() : "";
+
                             StudentFrequency freq = frequencyByKey.get(d);
+
                             if (freq != null) {
                                 String value = frequencyTypeService.resolveAcronym(freq.getFrequencyTypeId());
-                                return StudentFrequencyDTO.FrequencyValueDTO.builder()
+                                return StudentFrequencyDTO.FrequencyCellDTO.builder()
                                         .id(freq.getId())
+                                        .classTime(classTime)
+                                        .date(formattedDate)
                                         .value(value)
                                         .build();
                             } else {
-                                return StudentFrequencyDTO.FrequencyValueDTO.builder()
+                                return StudentFrequencyDTO.FrequencyCellDTO.builder()
                                         .id(null)
+                                        .classTime(classTime)
+                                        .date(formattedDate)
                                         .value("")
                                         .build();
                             }
@@ -52,11 +64,17 @@ public class FrequencyCellServiceImpl implements FrequencyCellService {
     }
 
     @Override
-    public Map<String, Map<String, Boolean>> buildDefaultEditableMap(List<String> dateColumns, boolean hasOccurrence) {
+    public Map<String, StudentFrequencyDTO.EditableFrequencyDTO> buildDefaultEditableMap(
+            List<String> dateColumns,
+            boolean hasOccurrence
+    ) {
         return dateColumns.stream()
                 .collect(Collectors.toMap(
                         d -> d,
-                        d -> FrequencyUtil.buildCellInfo(hasOccurrence, false)
+                        d -> StudentFrequencyDTO.EditableFrequencyDTO.builder()
+                                .editable(hasOccurrence)
+                                .observation(false)
+                                .build()
                 ));
     }
 }

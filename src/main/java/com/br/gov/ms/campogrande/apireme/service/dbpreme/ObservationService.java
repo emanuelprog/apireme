@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface ObservationService {
-    void applyObservationsFrequency(List<HistoryFrequency> histories, List<String> dateColumns,
-                           Map<String, StudentFrequencyDTO.FrequencyValueDTO> frequencies,
-                           Map<String, Map<String, Boolean>> editableMap);
+    void applyObservationsFrequency(
+            List<HistoryFrequency> histories,
+            List<String> dateColumns,
+            Map<String, StudentFrequencyDTO.FrequencyCellDTO> frequencies,
+            Map<String, StudentFrequencyDTO.EditableFrequencyDTO> editableMap
+    );
 }

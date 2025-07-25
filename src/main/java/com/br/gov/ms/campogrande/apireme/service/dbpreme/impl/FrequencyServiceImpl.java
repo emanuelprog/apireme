@@ -1,14 +1,14 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.diary.DiaryGradeDTO;
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencyRequestDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencyResponseDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencySaveDTO;
 import com.br.gov.ms.campogrande.apireme.model.dbedu.Student;
 import com.br.gov.ms.campogrande.apireme.model.dbpreme.StudentFrequency;
-import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencySaveDTO;
 import com.br.gov.ms.campogrande.apireme.service.dbdedu.StudentService;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,20 +42,18 @@ public class FrequencyServiceImpl implements FrequencyService {
 
         List<StudentFrequencyDTO> studentDTOs = studentFrequencyService.buildStudentFrequencyDTOs(students, dateColumns, frequencyByStudent);
 
-        return new FrequencyResponseDTO(studentDTOs, dateColumns);
+        return new FrequencyResponseDTO(studentDTOs, dateColumns, null);
     }
 
+    @Transactional
     @Override
-    public FrequencySaveDTO saveFrequencies(FrequencySaveDTO payload) {
-        DiaryGradeDTO savedDiaryGrade = diaryGradeService.save(payload.getDiaryGrade());
+    public Long saveFrequencies(FrequencyRequestDTO frequencyRequestDTO) {
+        DiaryGradeDTO savedDiaryGrade = diaryGradeService.save(frequencyRequestDTO.getDiaryGrade());
 
-        List<StudentFrequencySaveDTO> studentFrequencySaveDTOS = studentFrequencyService.saveStudentFrequencies(
-                payload.getFrequencies(), savedDiaryGrade.getId(), savedDiaryGrade.getChangeUser()
+        studentFrequencyService.saveStudentFrequencies(
+                frequencyRequestDTO.getStudentsFrequency(), savedDiaryGrade.getId(), savedDiaryGrade.getChangeUser()
         );
 
-        payload.getDiaryGrade().setId(savedDiaryGrade.getId());
-        payload.setFrequencies(studentFrequencySaveDTOS);
-
-        return payload;
+        return savedDiaryGrade.getId();
     }
 }

@@ -17,7 +17,7 @@ public class DateColumnServiceImpl implements DateColumnService {
         List<String> result = new ArrayList<>();
         LocalDate current = DateUtil.convertToLocalDate(from);
         LocalDate end = DateUtil.convertToLocalDate(to);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         while (!current.isAfter(end)) {
             DayOfWeek dow = current.getDayOfWeek();

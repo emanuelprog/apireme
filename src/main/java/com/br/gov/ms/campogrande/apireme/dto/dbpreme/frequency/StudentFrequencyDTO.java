@@ -12,17 +12,29 @@ public class StudentFrequencyDTO {
     private Long id;
     private String name;
     private Long callNumber;
-    private Boolean hasObservation;
     private Boolean hasOccurrence;
-    private Map<String, FrequencyValueDTO> frequencies;
-    private Map<String, Map<String, Boolean>> editableFrequencies;
+
+    private Map<String, FrequencyCellDTO> frequencies;
+
+    private Map<String, EditableFrequencyDTO> editableFrequencies;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class FrequencyValueDTO {
-        private String value;
+    public static class FrequencyCellDTO {
         private Long id;
+        private String classTime;
+        private String date;
+        private String value;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class EditableFrequencyDTO {
+        private Boolean editable;
+        private Boolean observation;
     }
 }
