@@ -4,6 +4,7 @@ import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.FrequencyRequestD
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.FrequencyService;
 import com.br.gov.ms.campogrande.apireme.util.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/frequencies")
 @RequiredArgsConstructor
+@Tag(name = "Gerenciamento de Frequências", description = "Operações relacionadas ao gerenciamento de frequência dos alunos da tela 'Frequência'")
 public class FrequencyController {
 
     private final FrequencyService frequencyService;

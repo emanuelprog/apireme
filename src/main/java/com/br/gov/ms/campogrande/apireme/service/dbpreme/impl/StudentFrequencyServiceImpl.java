@@ -1,5 +1,6 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.HistoryFrequencyDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
 import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.StudentFrequencyMapper;
 import com.br.gov.ms.campogrande.apireme.model.dbedu.Student;
@@ -7,6 +8,7 @@ import com.br.gov.ms.campogrande.apireme.model.dbpreme.StudentFrequency;
 import com.br.gov.ms.campogrande.apireme.repository.dbpreme.StudentFrequencyRepository;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.FrequencyCellService;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.FrequencyTypeService;
+import com.br.gov.ms.campogrande.apireme.service.dbpreme.HistoryService;
 import com.br.gov.ms.campogrande.apireme.service.dbpreme.StudentFrequencyService;
 import com.br.gov.ms.campogrande.apireme.util.DateUtil;
 import com.br.gov.ms.campogrande.apireme.util.FrequencyUtil;
@@ -27,6 +29,7 @@ public class StudentFrequencyServiceImpl implements StudentFrequencyService {
     private final StudentFrequencyRepository studentFrequencyRepository;
     private final FrequencyTypeService frequencyTypeService;
     private final FrequencyCellService frequencyCellService;
+    private final HistoryService historyService;
     private final StudentFrequencyMapper studentFrequencyMapper;
 
     @Override
@@ -53,6 +56,8 @@ public class StudentFrequencyServiceImpl implements StudentFrequencyService {
             } else {
                 dto.setName(student.getName());
             }
+
+            List<HistoryFrequencyDTO> histories = historyService.findHistoriesFrequencyByStudent(student.getId());
 
             boolean hasOccurrence = student.getOccurrenceId() == 1;
 
@@ -86,6 +91,10 @@ public class StudentFrequencyServiceImpl implements StudentFrequencyService {
                         .observation(false)
                         .build()
                 );
+            }
+
+            if (!histories.isEmpty()) {
+                historyService.applyHistoriesFrequency(histories, dateColumns, frequencies, editableMap);
             }
 
             dto.setFrequencies(frequencies);

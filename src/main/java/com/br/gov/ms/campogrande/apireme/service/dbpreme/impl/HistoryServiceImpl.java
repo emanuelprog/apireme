@@ -1,9 +1,12 @@
 package com.br.gov.ms.campogrande.apireme.service.dbpreme.impl;
 
+import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.HistoryFrequencyDTO;
 import com.br.gov.ms.campogrande.apireme.dto.dbpreme.frequency.StudentFrequencyDTO;
-import com.br.gov.ms.campogrande.apireme.model.dbpreme.HistoryFrequency;
-import com.br.gov.ms.campogrande.apireme.service.dbpreme.ObservationService;
+import com.br.gov.ms.campogrande.apireme.mapper.dbpreme.HistoryFrequencyMapper;
+import com.br.gov.ms.campogrande.apireme.repository.dbpreme.HistoryFrequencyRepository;
+import com.br.gov.ms.campogrande.apireme.service.dbpreme.HistoryService;
 import com.br.gov.ms.campogrande.apireme.util.DateUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,18 +16,22 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ObservationServiceImpl implements ObservationService {
+@RequiredArgsConstructor
+public class HistoryServiceImpl implements HistoryService {
+
+    private final HistoryFrequencyRepository historyFrequencyRepository;
+    private final HistoryFrequencyMapper historyFrequencyMapper;
 
     @Override
-    public void applyObservationsFrequency(
-            List<HistoryFrequency> histories,
+    public void applyHistoriesFrequency(
+            List<HistoryFrequencyDTO> histories,
             List<String> dateColumns,
             Map<String, StudentFrequencyDTO.FrequencyCellDTO> freqMap,
             Map<String, StudentFrequencyDTO.EditableFrequencyDTO> editableMap
     ) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        for (HistoryFrequency history : histories) {
+        for (HistoryFrequencyDTO history : histories) {
             LocalDate start = DateUtil.convertToLocalDate(history.getStartDate());
             LocalDate end = DateUtil.convertToLocalDate(history.getEndDate());
             long days = ChronoUnit.DAYS.between(start, end) + 1;
@@ -38,8 +45,8 @@ public class ObservationServiceImpl implements ObservationService {
                         StudentFrequencyDTO.FrequencyCellDTO cell = freqMap.getOrDefault(column,
                                 StudentFrequencyDTO.FrequencyCellDTO.builder()
                                         .id(null)
-                                        .classTime("") // ou derive de column, se necessário
-                                        .date(date.toString()) // yyyy-MM-dd
+                                        .classTime("")
+                                        .date(date.toString())
                                         .value("")
                                         .build()
                         );
@@ -57,5 +64,10 @@ public class ObservationServiceImpl implements ObservationService {
                 }
             }
         }
+    }
+
+    @Override
+    public List<HistoryFrequencyDTO> findHistoriesFrequencyByStudent(Long studentId) {
+        return historyFrequencyRepository.findAllByStudentId(studentId).stream().map(historyFrequencyMapper::toDTO).toList();
     }
 }

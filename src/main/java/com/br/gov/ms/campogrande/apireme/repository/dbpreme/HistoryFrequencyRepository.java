@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface HistoryFrequencyRepository extends JpaRepository<HistoryFrequency, Long> {
 
-    List<HistoryFrequency> findByStudentId(Long studentId);
+    List<HistoryFrequency> findAllByStudentId(Long studentId);
 }
